@@ -3,22 +3,34 @@ package com.rodrigoDrummond.WebServiceSpringJPA.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-//serializable transforma objetos em cadeia de bytes
-//para objeto trafegar na rede e ser armazenado em arquivos
-public class User implements Serializable{
-	
-	//numero de série do serializable
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+/*serializable transforma objetos em cadeia de bytes
+para objeto trafegar na rede e ser armazenado em arquivos*/
+
+
+@Entity
+@Table(name = "tb_user")//renomeia por user é palavra reservada de h2, para evitar conflito
+public class User implements Serializable {
+
+	// numero de série do serializable
 	private static final long serialVersionUID = 1L;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
-	
+
 	public User() {
 	}
-	
+
 	public User(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
@@ -67,12 +79,13 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	//somente para id
+	// somente para id
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	//somente para id
+
+	// somente para id
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -84,8 +97,5 @@ public class User implements Serializable{
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
+
 }

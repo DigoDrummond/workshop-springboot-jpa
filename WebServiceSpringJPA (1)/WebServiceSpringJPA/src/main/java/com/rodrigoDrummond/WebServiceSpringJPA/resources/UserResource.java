@@ -11,10 +11,10 @@ import com.rodrigoDrummond.WebServiceSpringJPA.entities.User;
 @RequestMapping(value = "/users")
 public class UserResource {
 
-	//endpoint para acessar usuários
+	// endpoint para acessar usuários
 	@GetMapping
-	public ResponseEntity<User> findAll(){
-		User u = new User(1L,"Pedro","pedro@gmail.com","999999999","12345");
+	public ResponseEntity<User> findAll() {
+		User u = new User(1L, "Pedro", "pedro@gmail.com", "999999999", "12345");
 		return ResponseEntity.ok().body(u);
 	}
 }
