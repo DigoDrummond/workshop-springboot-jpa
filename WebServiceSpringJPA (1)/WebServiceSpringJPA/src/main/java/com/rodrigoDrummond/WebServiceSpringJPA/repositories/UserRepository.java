@@ -6,6 +6,7 @@ import com.rodrigoDrummond.WebServiceSpringJPA.entities.User;
 
 //interface que herda métodos da interface JPARepository
 //<tipo da entidade, tipo atributo chave>
-public interface UserRepository extends JpaRepository<User, Long>{
+
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }
