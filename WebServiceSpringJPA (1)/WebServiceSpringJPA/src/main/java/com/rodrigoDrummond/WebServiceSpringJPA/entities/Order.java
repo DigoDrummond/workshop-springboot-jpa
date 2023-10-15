@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rodrigoDrummond.WebServiceSpringJPA.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,12 +34,15 @@ public class Order implements Serializable{
 	@JoinColumn(name = "client_id")
 	private User client;
 	
+	private Integer orderStatus;
+	
 	
 	public Order() {
 	}
 
 
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment,OrderStatus orderStatus, User client) {
+		setOrderStatus(orderStatus);
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
@@ -62,6 +66,18 @@ public class Order implements Serializable{
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+
+	
+
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
+
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		if(orderStatus != null)
+		this.orderStatus = orderStatus.getCode();
 	}
 
 
