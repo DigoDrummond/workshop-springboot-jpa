@@ -3,6 +3,7 @@ package com.rodrigoDrummond.WebServiceSpringJPA.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.pk.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -30,6 +31,7 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
