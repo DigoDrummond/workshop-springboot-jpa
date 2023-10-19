@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.Category;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.Order;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.OrderItem;
+import com.rodrigoDrummond.WebServiceSpringJPA.entities.Payment;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.Product;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.User;
 import com.rodrigoDrummond.WebServiceSpringJPA.entities.enums.OrderStatus;
@@ -86,6 +87,16 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		
+		//para salvar objeto dependente de relação 1 pra 1 não se chama o repository do próprio objeto
+		
+		//associa pedido 1 com pagamento p1
+		o1.setPayment(pay1);
+		
+		//jpa salva atualizado
+		orderRepository.save(o1);
 	}
 
 }
