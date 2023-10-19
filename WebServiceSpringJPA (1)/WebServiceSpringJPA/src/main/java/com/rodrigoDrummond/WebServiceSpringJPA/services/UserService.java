@@ -19,6 +19,7 @@ public class UserService {
 		return repository.findAll();
 	}
 	public User findById(Long id) {
+		//findById vai no banco de dados e traz objeto
 		Optional<User> obj = repository.findById(id);
 		//retorna objeto do tipo user que esta dentro do optional
 		return obj.get();
@@ -30,5 +31,18 @@ public class UserService {
 	
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+	//parametros-> id do usuário que será atuaizado e obj com dados a serem atualizados
+	public User update(Long id, User obj) {
+		//get one so instancia obj, não vai no banco de dados
+		User entity = repository.getReferenceById(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+	//método não deixa atualizar nem id nem senha
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
 	}
 }
