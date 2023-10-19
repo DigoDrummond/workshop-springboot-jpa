@@ -13,6 +13,8 @@ import com.rodrigoDrummond.WebServiceSpringJPA.repositories.UserRepository;
 import com.rodrigoDrummond.WebServiceSpringJPA.services.exceptions.DatabaseException;
 import com.rodrigoDrummond.WebServiceSpringJPA.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 
@@ -48,10 +50,14 @@ public class UserService {
 	}
 	//parametros-> id do usuário que será atuaizado e obj com dados a serem atualizados
 	public User update(Long id, User obj) {
-		//get one so instancia obj, não vai no banco de dados
+		//getReferenceById so instancia obj, não vai no banco de dados
+		try {
 		User entity = repository.getReferenceById(id);
 		updateData(entity, obj);
 		return repository.save(entity);
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 	//método não deixa atualizar nem id nem senha
 	private void updateData(User entity, User obj) {
