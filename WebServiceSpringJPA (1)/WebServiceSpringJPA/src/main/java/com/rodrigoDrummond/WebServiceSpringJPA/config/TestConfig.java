@@ -95,7 +95,7 @@ public class TestConfig implements CommandLineRunner {
 		//associa pedido 1 com pagamento p1
 		o1.setPayment(pay1);
 		
-		//jpa salva atualizado
+		//jpa salva pagamento associando a id do pedido 1
 		orderRepository.save(o1);
 	}
 
